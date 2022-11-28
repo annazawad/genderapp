@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block bodyblock %}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <br><br>
+        <h3 class="display-8">Age classification</h3>
+            <p>Upload an image (.jpg, .jpeg, .png), some text, tex, tex, text</p>
+
+            <form action="#" method="POST" enctype="multipart/form-data">
+                <div class="input-group">
+                    <input type="file" class="form-control" name="image_name" required>
+                    <input type="submit" value="upload & Predict" class="btn btn-outline-primary">
+
+                </div>
+
+            </form>
+
+        </div>
+
+        <div class="col-8">
+        {% if fileupload %}
+            <br><br>
+            <h3 class="display-8">Predicted image</h3>
+            <img src="/static/predict/prediction_image.jpg" class="image-fluid" height="300" alt="">
+
+            <hr>
+            <br>
+
+            <table class="table table-hover table-striped">
+                <tr>
+                   <th>Detection face</th>
+                    <th>Eigen Image</th>
+                    <th>Prediction Gender</th>
+                    <th>Score</th>
+                </tr>
+                {% for element in report %}
+                <tr>
+                    <td><img src="/static/predict/{{ element[0] }}" class="image-fluid" height="100"></td>
+                     <td><img src="/static/predict/{{ element[1] }}" class="image-fluid" height="100"></td>
+                    <td>{{ element[2] }}</td>
+                    <td>{{ element[3] }}</td>
+                </tr>
+
+                {% endfor %}
+            </table>
+            {% endif %}
+
+
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}
